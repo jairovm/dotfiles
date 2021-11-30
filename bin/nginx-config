@@ -1,0 +1,107 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+require "fileutils"
+
+options = { port: 3000 }
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{__FILE__} [options]"
+
+  opts.on('-s', '--server-name SERVER_NAME', 'Server name') do |server_name|
+    options[:"server-name"] = server_name.downcase
+  end
+
+  opts.on('-p', '--port [PORT]', Integer, 'Http port') do |port|
+    options[:port] = port
+  end
+
+  opts.on('-r', '--route ROUTE', 'Http route') do |route|
+    options[:route] = route.downcase
+  end
+
+  opts.on('-h', '--help', 'Displays Help') do
+    puts opts
+    exit
+  end
+end
+
+begin
+  parser.parse!
+  mandatory = %i[server-name route]
+  missing   = mandatory.select { |param| options[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+rescue OptionParser::ParseError => e
+  puts e
+  puts parser
+  exit
+end
+
+server_name = options[:"server-name"]
+route       = options[:route]
+port        = options[:port]
+hosts       = %W[#{server_name} *.#{server_name} localhost 127.0.0.1 ::1]
+www_dir     = "#{ENV["HOME"]}/code/www"
+certs_dir   = "#{www_dir}/certs"
+servers_dir = "#{www_dir}/servers"
+key_path    = File.join(certs_dir, "#{server_name}.key")
+cert_path   = File.join(certs_dir, "#{server_name}.cert")
+
+FileUtils.mkdir_p([certs_dir, servers_dir])
+
+`mkcert -cert-file '#{cert_path}' -key-file '#{key_path}' #{%("#{hosts.join('" "')}")}`
+
+File.write("#{servers_dir}/#{server_name}.conf", <<~CONFIG)
+  upstream #{server_name} { server #{route}:#{port}; }
+
+  server {
+      server_name #{server_name};
+      listen 80;
+
+      listen 443 ssl http2;
+
+      ssl_certificate     #{cert_path};
+      ssl_certificate_key #{key_path};
+
+      location / {
+          # enforce ssl on server side
+          if ($scheme = http) {
+              return 301 https://$host$request_uri;
+          }
+
+          proxy_pass http://#{server_name};
+
+          # HTTP 1.1 support
+          proxy_http_version     1.1;
+          proxy_buffering        off;
+          proxy_redirect         off;
+
+          proxy_set_header       Host $http_host;
+          proxy_set_header       Upgrade $http_upgrade;
+          proxy_set_header       Connection "upgrade";
+          proxy_set_header       X-Real-IP $remote_addr;
+          proxy_set_header       X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header       X-Forwarded-Proto "https";
+
+          # Pass the original X-Forwarded-For
+          proxy_set_header       X-Original-Forwarded-For $http_x_forwarded_for;
+
+          # mitigate HTTPoxy Vulnerability
+          # https://www.nginx.com/blog/mitigating-the-httpoxy-vulnerability-with-nginx/
+          proxy_set_header       Proxy "";
+
+          proxy_intercept_errors on;
+          proxy_connect_timeout  300;
+          proxy_send_timeout     300;
+          proxy_read_timeout     300;
+          send_timeout           300;
+          client_max_body_size   25m;
+          recursive_error_pages  on;
+      }
+  }
+CONFIG
+
+unless system("docker restart nginx > /dev/null 2>&1")
+  `docker rm -f nginx > /dev/null 2>&1`
+  `docker run -d --name nginx -p 80:80 -p 443:443 -v #{certs_dir}:#{certs_dir} -v #{servers_dir}:/etc/nginx/conf.d nginx`
+end
