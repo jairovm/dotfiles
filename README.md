@@ -19,6 +19,7 @@ brew install tmux
 ```bash
 git clone https://github.com/jairovm/dotfiles.git ~/.dotfiles
 ln -nsf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -nsf ~/.dotfiles/zed/keymap.json ~/.config/zed/keymap.json
 ```
 
 ### Resources
