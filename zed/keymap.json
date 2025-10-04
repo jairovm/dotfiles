@@ -67,6 +67,18 @@
   {
     "context": "Workspace",
     "bindings": {
+      "ctrl-f": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-f": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem"
     }
