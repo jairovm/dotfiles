@@ -135,5 +135,11 @@
     "bindings": {
       "cmd-d": "pane::SplitRight"
     }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-shift-d": "pane::SplitDown"
+    }
   }
 ]
