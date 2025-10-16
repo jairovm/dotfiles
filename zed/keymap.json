@@ -6,107 +6,11 @@
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-\\": "workspace::ActivatePreviousPane"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == insert",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == visual",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
+      "ctrl-\\": "workspace::ActivatePreviousPane",
       "ctrl-shift-left": "workspace::SwapPaneLeft",
-      "ctrl-shift-right": "workspace::SwapPaneRight"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "ctrl-shift-left": "workspace::SwapPaneLeft",
-      "ctrl-shift-right": "workspace::SwapPaneRight"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == insert",
-    "bindings": {
-      "ctrl-shift-left": "workspace::SwapPaneLeft",
-      "ctrl-shift-right": "workspace::SwapPaneRight"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == visual",
-    "bindings": {
-      "ctrl-shift-left": "workspace::SwapPaneLeft",
-      "ctrl-shift-right": "workspace::SwapPaneRight"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-f": "pane::DeploySearch"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "ctrl-f": "pane::DeploySearch"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
+      "ctrl-shift-right": "workspace::SwapPaneRight",
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == insert",
-    "bindings": {
-      "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == visual",
-    "bindings": {
-      "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
       "cmd-1": ["pane::ActivateItem", 0],
       "cmd-2": ["pane::ActivateItem", 1],
       "cmd-3": ["pane::ActivateItem", 2],
@@ -115,13 +19,48 @@
       "cmd-6": ["pane::ActivateItem", 5],
       "cmd-7": ["pane::ActivateItem", 6],
       "cmd-8": ["pane::ActivateItem", 7],
-      "cmd-9": ["pane::ActivateItem", 8]
+      "cmd-9": ["pane::ActivateItem", 8],
+      "ctrl-p": "file_finder::Toggle"
     }
   },
   {
-    "context": "Workspace",
+    "context": "Editor && vim_mode == normal",
     "bindings": {
-      "ctrl-p": "file_finder::Toggle"
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-shift-left": "workspace::SwapPaneLeft",
+      "ctrl-shift-right": "workspace::SwapPaneRight",
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-shift-left": "workspace::SwapPaneLeft",
+      "ctrl-shift-right": "workspace::SwapPaneRight",
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-shift-left": "workspace::SwapPaneLeft",
+      "ctrl-shift-right": "workspace::SwapPaneRight",
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
     }
   },
   {
@@ -133,12 +72,7 @@
   {
     "context": "Terminal",
     "bindings": {
-      "cmd-d": "pane::SplitRight"
-    }
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
+      "cmd-d": "pane::SplitRight",
       "cmd-shift-d": "pane::SplitDown"
     }
   }
