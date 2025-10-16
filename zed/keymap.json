@@ -76,6 +76,7 @@
       "cmd-shift-d": "pane::SplitDown",
       "cmd-k": ["workspace::SendKeystrokes", "ctrl-b K"],
       "cmd-t": ["workspace::SendKeystrokes", "ctrl-b c"],
+      "cmd-w": ["workspace::SendKeystrokes", "ctrl-b ctrl-w"],
       "ctrl-tab": ["workspace::SendKeystrokes", "ctrl-b n"],
       "ctrl-shift-tab": ["workspace::SendKeystrokes", "ctrl-b p"],
       "cmd-1": ["workspace::SendKeystrokes", "ctrl-b 1"],
