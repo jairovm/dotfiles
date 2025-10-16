@@ -73,7 +73,8 @@
     "context": "Terminal",
     "bindings": {
       "cmd-d": "pane::SplitRight",
-      "cmd-shift-d": "pane::SplitDown"
+      "cmd-shift-d": "pane::SplitDown",
+      "cmd-t": "workspace::NewTerminal"
     }
   }
 ]
