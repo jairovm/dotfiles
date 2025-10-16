@@ -7,8 +7,6 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-\\": "workspace::ActivatePreviousPane",
-      "ctrl-shift-left": "workspace::SwapPaneLeft",
-      "ctrl-shift-right": "workspace::SwapPaneRight",
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem",
       "cmd-1": ["pane::ActivateItem", 0],
