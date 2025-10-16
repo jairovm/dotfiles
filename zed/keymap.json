@@ -74,7 +74,19 @@
     "bindings": {
       "cmd-d": "pane::SplitRight",
       "cmd-shift-d": "pane::SplitDown",
-      "cmd-t": "workspace::NewTerminal"
+      "cmd-k": ["workspace::SendKeystrokes", "ctrl-b K"],
+      "cmd-t": ["workspace::SendKeystrokes", "ctrl-b c"],
+      "ctrl-tab": ["workspace::SendKeystrokes", "ctrl-b n"],
+      "ctrl-shift-tab": ["workspace::SendKeystrokes", "ctrl-b p"],
+      "cmd-1": ["workspace::SendKeystrokes", "ctrl-b 1"],
+      "cmd-2": ["workspace::SendKeystrokes", "ctrl-b 2"],
+      "cmd-3": ["workspace::SendKeystrokes", "ctrl-b 3"],
+      "cmd-4": ["workspace::SendKeystrokes", "ctrl-b 4"],
+      "cmd-5": ["workspace::SendKeystrokes", "ctrl-b 5"],
+      "cmd-6": ["workspace::SendKeystrokes", "ctrl-b 6"],
+      "cmd-7": ["workspace::SendKeystrokes", "ctrl-b 7"],
+      "cmd-8": ["workspace::SendKeystrokes", "ctrl-b 8"],
+      "cmd-9": ["workspace::SendKeystrokes", "ctrl-b 9"]
     }
   }
 ]
