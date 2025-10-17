@@ -2,6 +2,7 @@
   {
     "context": "Workspace",
     "bindings": {
+      "ctrl-`": ["workspace::SendKeystrokes", "~"],
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
