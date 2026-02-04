@@ -19,8 +19,8 @@
       "cmd-7": ["pane::ActivateItem", 6],
       "cmd-8": ["pane::ActivateItem", 7],
       "cmd-9": ["pane::ActivateItem", 8],
-      "ctrl-p": "file_finder::Toggle"
-    }
+      "ctrl-p": "file_finder::Toggle",
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
@@ -33,8 +33,8 @@
       "ctrl-shift-right": "workspace::SwapPaneRight",
       "ctrl-f": "pane::DeploySearch",
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
@@ -45,9 +45,10 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-shift-left": "workspace::SwapPaneLeft",
       "ctrl-shift-right": "workspace::SwapPaneRight",
+      "ctrl-f": "pane::DeploySearch",
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+    },
   },
   {
     "context": "Editor && vim_mode == visual",
@@ -58,21 +59,22 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-shift-left": "workspace::SwapPaneLeft",
       "ctrl-shift-right": "workspace::SwapPaneRight",
+      "ctrl-f": "pane::DeploySearch",
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePreviousItem"
-    }
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-p": "file_finder::Toggle"
-    }
+      "ctrl-p": "file_finder::Toggle",
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "cmd-d": "pane::SplitRight",
-      "cmd-shift-d": "pane::SplitDown",
+      "cmd-d": ["workspace::SendKeystrokes", "ctrl-b %"],
+      "cmd-shift-d": ["workspace::SendKeystrokes", "ctrl-b \""],
       "cmd-k": ["workspace::SendKeystrokes", "ctrl-b K"],
       "cmd-t": ["workspace::SendKeystrokes", "ctrl-b c"],
       "cmd-w": ["workspace::SendKeystrokes", "ctrl-b ctrl-w"],
@@ -86,7 +88,15 @@
       "cmd-6": ["workspace::SendKeystrokes", "ctrl-b 6"],
       "cmd-7": ["workspace::SendKeystrokes", "ctrl-b 7"],
       "cmd-8": ["workspace::SendKeystrokes", "ctrl-b 8"],
-      "cmd-9": ["workspace::SendKeystrokes", "ctrl-b 9"]
-    }
-  }
+      "cmd-9": ["workspace::SendKeystrokes", "ctrl-b 9"],
+      "ctrl-shift-h": ["workspace::SendKeystrokes", "ctrl-b left"],
+      "ctrl-shift-j": ["workspace::SendKeystrokes", "ctrl-b down"],
+      "ctrl-shift-k": ["workspace::SendKeystrokes", "ctrl-b up"],
+      "ctrl-shift-l": ["workspace::SendKeystrokes", "ctrl-b right"],
+      "ctrl-cmd-right": ["workspace::SendKeystrokes", "ctrl-b ctrl-right"],
+      "ctrl-cmd-left": ["workspace::SendKeystrokes", "ctrl-b ctrl-left"],
+      "ctrl-cmd-up": ["workspace::SendKeystrokes", "ctrl-b ctrl-up"],
+      "ctrl-cmd-down": ["workspace::SendKeystrokes", "ctrl-b ctrl-down"],
+    },
+  },
 ]
