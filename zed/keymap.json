@@ -78,6 +78,7 @@
       "cmd-k": ["workspace::SendKeystrokes", "ctrl-b K"],
       "cmd-t": ["workspace::SendKeystrokes", "ctrl-b c"],
       "cmd-w": ["workspace::SendKeystrokes", "ctrl-b ctrl-w"],
+      "shift-enter": ["terminal::SendText", "\u001b[13;2u"],
       "ctrl-tab": ["workspace::SendKeystrokes", "ctrl-b n"],
       "ctrl-shift-tab": ["workspace::SendKeystrokes", "ctrl-b p"],
       "cmd-1": ["workspace::SendKeystrokes", "ctrl-b 1"],
