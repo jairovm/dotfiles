@@ -6,6 +6,7 @@
   * [Dependencies](#dependencies)
   * [Installing](#installing)
 * [Zed terminal shortcuts](#zed-terminal-shortcuts)
+* [Zsh integration](#zsh-integration)
 * [Resources](#resources)
 
 ## About
@@ -57,16 +58,48 @@ When the terminal is focused:
 | `Cmd+1..9` | Select a tmux window or Herdr tab |
 | `Ctrl+Cmd+Arrow` | Resize a multiplexer pane |
 | `Ctrl+Shift+Left/Right` | Reorder tmux windows or Herdr tabs |
-| `Cmd+K` | tmux: clear the screen/history and send Enter; Herdr: send Enter only |
+| `Cmd+K` | tmux: clear the screen/history and send Enter; Herdr: clear at a configured Zsh prompt, otherwise send Enter |
 
 Herdr keeps `Ctrl+B` as its prefix. Its `Ctrl+B`, then uppercase `K` binding
-forwards Enter to the active pane; it does not clear that pane's scrollback.
+runs `herdr/cmd-k.sh`. At a Zsh prompt with the integration loaded, it requests
+screen/scrollback clearing and then sends Enter. The pending command is preserved.
+Other foreground programs receive plain Enter; no `clear` text is inserted.
 
 After editing Herdr's configuration, reload it from your terminal:
 
 ```bash
 herdr server reload-config
 ```
+
+## Zsh integration
+
+Add the following after Oh My Zsh and your personal configuration in `~/.zshrc`:
+
+```zsh
+[[ ! -r "$HOME/.dotfiles/zsh/herdr.zsh" ]] || source "$HOME/.dotfiles/zsh/herdr.zsh"
+```
+
+Open a new Herdr pane after installing this integration. It only activates when
+`HERDR_PANE_ID` is set. Ordinary Enter still executes without clearing; `Cmd+K`
+clears first, including when the input is empty. Codex/OpenCode keep receiving
+Enter with their input unchanged. Shells that have not loaded the integration
+also receive plain Enter.
+
+The shell advertises its active editing prompt using small files under
+`${XDG_CACHE_HOME:-$HOME/.cache}/herdr-keymaps`. They contain prompt tokens, not
+command text. Hooks remove them when leaving the prompt, and reject stale requests.
+The shell and Herdr helper must use the same `XDG_CACHE_HOME` value.
+
+The integration uses Zsh's built-in hooks and shell tools; it does not query the
+process list or contact external services. Clearing affects terminal output, not
+the saved Zsh command history.
+
+Local startup tuning in `~/.zsh_custom` uses `rbenv init - --no-rehash zsh`,
+Homebrew's existing prefix for OpenSSL, and unique PATH entries. Run `rbenv rehash`
+if you manually add executables to a Ruby installation. Travis completion in
+`~/.zshrc` loads on first completion instead of on every shell startup.
+These personal startup files remain outside this repository; the reusable Herdr
+integration lives in `zsh/herdr.zsh` and `herdr/cmd-k.sh`.
 
 ## Resources
 

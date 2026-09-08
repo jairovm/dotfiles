@@ -46,7 +46,7 @@ reload_config = ["prefix+r", "prefix+shift+r"]
 resize_mode = "prefix+alt+r"
 
 # Evitar que el antiguo Ctrl+B K para limpiar tmux intercambie paneles.
-# Cmd+K conserva su secuencia original en Zed y envia Enter en herdr.
+# Cmd+K conserva su secuencia original en Zed; Zsh puede limpiar antes de Enter.
 swap_pane_up = "prefix+alt+k"
 
 # Opcional: herdr recuerda el ultimo panel incluso entre workspaces/tabs.
@@ -54,9 +54,9 @@ swap_pane_up = "prefix+alt+k"
 last_pane = 'prefix+backslash'
 
 # Cmd+K: enviar Enter al panel que estaba activo al pulsar el atajo.
-# No limpia la pantalla ni el historial; tmux conserva su limpieza original.
+# Zsh limpia pantalla e historial antes de ejecutar; otras apps reciben Enter.
 [[keys.command]]
 key = "prefix+shift+k"
 type = "shell"
-command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" enter'
-description = "Enviar Enter al panel activo"
+command = '/bin/sh "$HOME/.dotfiles/herdr/cmd-k.sh"'
+description = "Limpiar en Zsh y enviar Enter"
