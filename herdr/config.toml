@@ -1,0 +1,62 @@
+# herdr dentro de la terminal integrada de Zed.
+# Atajos compatibles con las secuencias que Zed envia tambien a tmux.
+onboarding = false
+
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[terminal]
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+b"
+
+# Zed conserva Ctrl+H/J/K/L para navegar sus propios paneles.
+# Ctrl+Shift+H/J/K/L en Zed envia estas secuencias con flechas.
+focus_pane_left = ["prefix+left", "prefix+h"]
+focus_pane_down = ["prefix+down", "prefix+j"]
+focus_pane_up = ["prefix+up", "prefix+k"]
+focus_pane_right = ["prefix+right", "prefix+l"]
+
+# Atajos que Zed ya traduce desde Cmd+D y Cmd+Shift+D.
+split_vertical = ["prefix+%", "prefix+v"]
+split_horizontal = ['prefix+"', "prefix+minus"]
+
+# Cmd+T, Ctrl+Tab, Ctrl+Shift+Tab y Cmd+1..9 en Zed.
+new_tab = "prefix+c"
+next_tab = "prefix+n"
+previous_tab = "prefix+p"
+switch_tab = "prefix+1..9"
+
+# Cmd+W en Zed cierra el panel activo, como con tmux.
+close_pane = ["prefix+ctrl+w", "prefix+x"]
+
+# Ctrl+Cmd+flechas en Zed.
+resize_pane_left = "prefix+ctrl+left"
+resize_pane_down = "prefix+ctrl+down"
+resize_pane_up = "prefix+ctrl+up"
+resize_pane_right = "prefix+ctrl+right"
+
+# Equivalentes de atajos adicionales de tmux.
+move_tab_previous = "ctrl+shift+left"
+move_tab_next = "ctrl+shift+right"
+copy_mode = ["prefix+space", "prefix+["]
+reload_config = ["prefix+r", "prefix+shift+r"]
+resize_mode = "prefix+alt+r"
+
+# Evitar que el antiguo Ctrl+B K para limpiar tmux intercambie paneles.
+# Cmd+K conserva su secuencia original en Zed y envia Enter en herdr.
+swap_pane_up = "prefix+alt+k"
+
+# Opcional: herdr recuerda el ultimo panel incluso entre workspaces/tabs.
+# Su alcance es mas amplio que select-pane -l de tmux.
+last_pane = 'prefix+backslash'
+
+# Cmd+K: enviar Enter al panel que estaba activo al pulsar el atajo.
+# No limpia la pantalla ni el historial; tmux conserva su limpieza original.
+[[keys.command]]
+key = "prefix+shift+k"
+type = "shell"
+command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" enter'
+description = "Enviar Enter al panel activo"
