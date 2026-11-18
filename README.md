@@ -13,12 +13,27 @@
 
 ### Dependencies
 
+macOS:
+
 ```bash
-brew install tmux
+brew install tmux fzf neovim ripgrep ack bc
 ```
 
-Install [Zed](https://zed.dev/) and, to use the Herdr configuration,
-[Herdr](https://herdr.dev/docs/install/).
+Debian/Ubuntu:
+
+```bash
+sudo apt install zsh tmux fzf neovim ripgrep ack bc
+```
+
+Install [Oh My Zsh](https://ohmyz.sh/), then its custom plugin and theme:
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+```
+
+Install [Herdr](https://herdr.dev/docs/install/) to use its configuration.
+[Zed](https://zed.dev/) and its keymap are optional.
 
 ### Installing
 
@@ -34,6 +49,31 @@ ln -nsf ~/.dotfiles/herdr/config.toml ~/.config/herdr/config.toml
 
 Only Herdr's configuration file is linked. Its logs and session files remain in
 its runtime/configuration directories outside this repository.
+
+### Shell configuration
+
+Back up existing shell files before setting these entry points:
+
+```bash
+printf '%s\n' 'source "$HOME/.dotfiles/zsh/env.zsh"' > ~/.zshenv
+printf '%s\n' 'source "$HOME/.dotfiles/zsh/profile.zsh"' > ~/.zprofile
+printf '%s\n' 'source "$HOME/.dotfiles/zsh/interactive.zsh"' > ~/.zshrc
+```
+
+Test a new zsh session before changing the login shell:
+
+```bash
+zsh -l
+chsh -s "$(command -v zsh)"
+```
+
+The shell loads Git aliases, autosuggestions, fzf integration, and Powerlevel10k.
+The client terminal needs a Nerd Font for prompt icons, including over SSH.
+Homebrew initialization runs only on macOS. Linux uses `C.UTF-8`.
+
+Additional interactive settings load from `~/.config/zsh/local.zsh`; additional
+login settings load from `~/.config/zsh/profile.local.zsh`. Both are optional.
+An existing `~/.p10k.zsh` overrides the prompt in `zsh/prompt.zsh`.
 
 ## Zed terminal shortcuts
 
@@ -73,7 +113,8 @@ herdr server reload-config
 
 ## Zsh integration
 
-Add the following after Oh My Zsh and your personal configuration in `~/.zshrc`:
+The shared shell entry point loads this integration automatically. For a separate
+zsh configuration, add the following after Oh My Zsh and other custom settings:
 
 ```zsh
 [[ ! -r "$HOME/.dotfiles/zsh/herdr.zsh" ]] || source "$HOME/.dotfiles/zsh/herdr.zsh"
@@ -94,12 +135,14 @@ The integration uses Zsh's built-in hooks and shell tools; it does not query the
 process list or contact external services. Clearing affects terminal output, not
 the saved Zsh command history.
 
-Local startup tuning in `~/.zsh_custom` uses `rbenv init - --no-rehash zsh`,
-Homebrew's existing prefix for OpenSSL, and unique PATH entries. Run `rbenv rehash`
-if you manually add executables to a Ruby installation. Travis completion in
-`~/.zshrc` loads on first completion instead of on every shell startup.
-These personal startup files remain outside this repository; the reusable Herdr
-integration lives in `zsh/herdr.zsh` and `herdr/cmd-k.sh`.
+Startup keeps PATH and completion directories unique. Homebrew's environment
+and rbenv initialization are cached and refreshed when their generators change.
+rbenv is initialized only when installed. Run `rbenv rehash` after manually
+adding executables to a Ruby installation. Travis completion loads on demand.
+Update Oh My Zsh manually with `omz update`.
+
+tmux includes its battery readout on macOS and omits it on Linux. OSC 52 clipboard
+writes are forwarded to terminals that support them.
 
 ## Resources
 

@@ -1,0 +1,7 @@
+# Local overrides and generated files.
+*.local.zsh
+.env
+.env.*
+!.env.example
+*.zwc
+.DS_Store
