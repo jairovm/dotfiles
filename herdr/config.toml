@@ -7,6 +7,7 @@ name = "gruvbox"
 auto_switch = false
 
 [terminal]
+default_shell = "zsh"
 new_cwd = "follow"
 
 [keys]

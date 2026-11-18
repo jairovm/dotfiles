@@ -20,9 +20,6 @@ if [[ $OSTYPE == darwin* ]]; then
     break
   done
   unset _brew_prefix _brew_cache
-elif [[ $OSTYPE == linux* ]]; then
-  export LANG=C.UTF-8
-  export LC_CTYPE=C.UTF-8
 fi
 
 [[ ! -r "$HOME/.config/zsh/profile.local.zsh" ]] || source "$HOME/.config/zsh/profile.local.zsh"
